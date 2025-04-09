@@ -83,6 +83,7 @@
                         Ajouter une promotion
                     </h3>
                 </div>
+                <form method="POST" action="{{ route('cohort.create') }}">
                 <div class="card-body flex flex-col gap-5">
                     <x-forms.input name="name" :label="__('Nom')" />
 
@@ -92,10 +93,13 @@
 
                     <x-forms.input type="date" name="year" :label="__('Fin de l\'année')" placeholder="" />
 
+                    <x-forms.input type="number" min="1" max="100" name="students" :label="__('Etudiants')" placeholder="" />
+
                     <x-forms.primary-button>
                         {{ __('Valider') }}
                     </x-forms.primary-button>
                 </div>
+                </form>
             </div>
         </div>
     </div>

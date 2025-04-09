@@ -14,23 +14,62 @@
                 <div class="card card-grid h-full min-w-full">
                     <div class="card-header">
                         <h3 class="card-title">
-                            Block 1
+                            <a href="{{route('cohort.index')}}">
+                            Promotions
+                            </a>
                         </h3>
                     </div>
                     <div class="card-body flex flex-col gap-5">
-
+                        <p> {{$cohorts}} </p>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="lg:col-span-1">
-            <div class="card card-grid h-full min-w-full">
-                <div class="card-header">
-                    <h3 class="card-title">
-                        Block 2
-                    </h3>
+        <div class="lg:col-span-2">
+            <div class="grid">
+                <div class="card card-grid h-full min-w-full">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <a href="{{route('teacher.index')}}">
+                            Enseignants
+                            </a>
+                        </h3>
+                    </div>
+                    <div class="card-body flex flex-col gap-5">
+                        <p> {{$teachers}} </p>
+                    </div>
                 </div>
-                <div class="card-body flex flex-col gap-5">
+            </div>
+        </div>
+        <div class="lg:col-span-2">
+            <div class="grid">
+                <div class="card card-grid h-full min-w-full">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <a href="{{route('student.index')}}">
+                            Étudiants
+                            </a>
+                        </h3>
+                    </div>
+                    <div class="card-body flex flex-col gap-5">
+                        <p> {{$students}} </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="lg:col-span-2">
+            <div class="grid">
+                <div class="card card-grid h-full min-w-full">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <a href="{{route('group.index')}}">
+                            Groupes
+                            </a>
+                        </h3>
+                    </div>
+                    <div class="card-body flex flex-col gap-5">
+                        <p> {{$groups}} </p>
+                    </div>
                 </div>
             </div>
         </div>
