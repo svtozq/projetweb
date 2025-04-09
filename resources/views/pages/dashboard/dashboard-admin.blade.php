@@ -14,7 +14,7 @@
                 <div class="card card-grid h-full min-w-full">
                     <div class="card-header">
                         <h3 class="card-title">
-                            <a href="{{route('cohort.index')}}">
+                            <a href="{{route('cohort.index')}}" class="hover:text-primary">
                             Promotions
                             </a>
                         </h3>
@@ -30,7 +30,7 @@
                 <div class="card card-grid h-full min-w-full">
                     <div class="card-header">
                         <h3 class="card-title">
-                            <a href="{{route('teacher.index')}}">
+                            <a href="{{route('teacher.index')}}" class="hover:text-primary">
                             Enseignants
                             </a>
                         </h3>
@@ -46,7 +46,7 @@
                 <div class="card card-grid h-full min-w-full">
                     <div class="card-header">
                         <h3 class="card-title">
-                            <a href="{{route('student.index')}}">
+                            <a href="{{route('student.index')}}" class="hover:text-primary">
                             Étudiants
                             </a>
                         </h3>
@@ -62,7 +62,7 @@
                 <div class="card card-grid h-full min-w-full">
                     <div class="card-header">
                         <h3 class="card-title">
-                            <a href="{{route('group.index')}}">
+                            <a href="{{route('group.index')}}" class="hover:text-primary">
                             Groupes
                             </a>
                         </h3>

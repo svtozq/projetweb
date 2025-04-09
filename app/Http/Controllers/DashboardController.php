@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Cohort;
 use App\Models\Teacher;
 use App\Models\Student;
 use App\Models\Groups;
+use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {

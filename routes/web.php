@@ -46,6 +46,7 @@ Route::middleware('auth')->group(function () {
 
         // Common life
         Route::get('common-life', [CommonLifeController::class, 'index'])->name('common-life.index');
+        Route::put('task/{taskId}/done', [CommonLifeController::class, 'taskDone'])->name('task.done');
     });
 
 });
