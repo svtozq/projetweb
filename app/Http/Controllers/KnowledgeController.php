@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Knowledge;
+use App\Models\User;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -15,6 +17,28 @@ class KnowledgeController extends Controller
      * @return Factory|View|Application|object
      */
     public function index() {
-        return view('pages.knowledge.index');
+        $allUsers = User::all();
+        $skillsToLearn = Knowledge::query()->where('status', null)->get();
+        $skillsLearning = Knowledge::query()->where('status', 0)->get();
+        $skillsLearnt = Knowledge::query()->where('status', 1)->get();
+        return view('pages.knowledge.index',  compact('allUsers', 'skillsToLearn', 'skillsLearning', 'skillsLearnt'));
+    }
+
+    public function skillLearning($skillId) {
+        $skill = Knowledge::find($skillId);
+
+        $skill->update([
+            'status' => 0
+        ]);
+        return redirect()->back();
+    }
+
+    public function skillLearnt($skillId) {
+        $skill = Knowledge::find($skillId);
+
+        $skill->update([
+            'status' => 1
+        ]);
+        return redirect()->back();
     }
 }
