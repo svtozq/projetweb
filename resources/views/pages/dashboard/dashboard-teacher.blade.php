@@ -1,7 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
         <h1 class="flex items-center gap-1 text-sm font-normal">
-            <span class="text-gray-700">{{ $cohort->name }}</span>
+            <span class="text-gray-700">
+                {{ __('Dashboard') }}
+            </span>
         </h1>
     </x-slot>
 
@@ -11,50 +13,52 @@
             <div class="grid">
                 <div class="card card-grid h-full min-w-full">
                     <div class="card-header">
-                        <h3 class="card-title">Etudiants</h3>
+                        <h3 class="card-title">Mes promotions</h3>
                     </div>
                     <div class="card-body">
-                        <div data-datatable="true" data-datatable-page-size="30">
+                        <div data-datatable="true" data-datatable-page-size="5">
                             <div class="scrollable-x-auto">
                                 <table class="table table-border" data-datatable-table="true">
                                     <thead>
                                     <tr>
-                                        <th class="min-w-[135px]">
+                                        <th class="min-w-[280px]">
                                             <span class="sort asc">
-                                                 <span class="sort-label">Nom</span>
+                                                 <span class="sort-label">Promotion</span>
                                                  <span class="sort-icon"></span>
                                             </span>
                                         </th>
                                         <th class="min-w-[135px]">
                                             <span class="sort">
-                                                <span class="sort-label">Prénom</span>
+                                                <span class="sort-label">Année</span>
                                                 <span class="sort-icon"></span>
                                             </span>
                                         </th>
                                         <th class="min-w-[135px]">
                                             <span class="sort">
-                                                <span class="sort-label">Date de naissance</span>
+                                                <span class="sort-label">Étudiants</span>
                                                 <span class="sort-icon"></span>
                                             </span>
                                         </th>
-                                        @can('viewAny', \App\Models\Cohort::class)
-                                        <th class="max-w-[50px]"></th>
-                                        @endcan
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($students as $student)
-                                        @if($student->cohort_id ) @endif
-                                        <tr>
-                                        <td>{{$students->last_name}}</td>
-                                        <td>{{$students->first_name}}</td>
-                                        <td>{{$students->date_of_birth}}</td>
-                                            @can('viewAny', \App\Models\Cohort::class)
-                                        <td class="cursor-pointer pointer">
-                                            <i class="ki-filled ki-trash"></i>
+                                    @foreach($cohorts as $cohort)
+                                        @if($cohort->teacher_id == Auth::id())
+                                    <tr>
+                                        <td>
+                                            <div class="flex flex-col gap-2">
+                                                <a class="leading-none font-medium text-sm text-gray-900">
+                                                    {{$cohort->name}}
+                                                </a>
+                                                <span class="text-2sm text-gray-700 font-normal leading-3">
+                                                    {{$cohort->description}}
+                                                </span>
+                                            </div>
                                         </td>
-                                            @endcan
+                                        <td>{{\Carbon\Carbon::parse($cohort->start_date)->year}} - {{\Carbon\Carbon::parse($cohort->end_date)->year}}</td>
+                                        <td>{{$cohort->students}}</td>
                                     </tr>
+                                        @endif
                                     @endforeach
                                     </tbody>
                                 </table>
@@ -75,26 +79,17 @@
                 </div>
             </div>
         </div>
-        @can('viewAny', \App\Models\Cohort::class)
         <div class="lg:col-span-1">
-            <div class="card h-full">
+            <div class="card card-grid h-full min-w-full">
                 <div class="card-header">
                     <h3 class="card-title">
-                        Ajouter un étudiant à la promotion
+                        Block 2
                     </h3>
                 </div>
                 <div class="card-body flex flex-col gap-5">
-                    <x-forms.dropdown name="user_id" :label="__('Etudiant')">
-                        <option value="1">Etudiant 1</option>
-                    </x-forms.dropdown>
-
-                    <x-forms.primary-button>
-                        {{ __('Valider') }}
-                    </x-forms.primary-button>
                 </div>
             </div>
         </div>
-        @endcan
     </div>
     <!-- end: grid -->
 </x-app-layout>

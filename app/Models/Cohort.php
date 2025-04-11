@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Cohort extends Model
 {
     protected $table        = 'cohorts';
-    protected $fillable     = ['school_id', 'name', 'description', 'start_date', 'end_date', 'students'];
+    protected $fillable     = ['id', 'school_id', 'teacher_id', 'name', 'description', 'students', 'start_date', 'end_date'];
 }

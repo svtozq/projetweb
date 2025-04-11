@@ -13,7 +13,7 @@ class DashboardController extends Controller
     public function index() {
         $userRole = auth()->user()->school()->pivot->role;
 
-        $cohorts = Cohort::all()->count();
+        $cohorts = Cohort::all();
         $teachers = Teacher::all()->count();
         $students = Student::all()->count();
         $groups = Groups::all()->count();

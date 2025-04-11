@@ -47,15 +47,15 @@
                                             <div class="flex flex-col gap-2">
                                                 <a class="leading-none font-medium text-sm text-gray-900 hover:text-primary"
                                                    href="{{ route('cohort.show', 1) }}">
-                                                    Promotion B1
+                                                    {{$cohort->name}}
                                                 </a>
                                                 <span class="text-2sm text-gray-700 font-normal leading-3">
-                                                    Cergy
+                                                    {{$cohort->description}}
                                                 </span>
                                             </div>
                                         </td>
-                                        <td>2024-2025</td>
-                                        <td>34</td>
+                                        <td>{{\Carbon\Carbon::parse($cohort->start_date)->year}} - {{\Carbon\Carbon::parse($cohort->end_date)->year}}</td>
+                                        <td>{{$cohort->students}}</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -76,6 +76,7 @@
                 </div>
             </div>
         </div>
+        @can('viewAny', \App\Models\Cohort::class)
         <div class="lg:col-span-1">
             <div class="card h-full">
                 <div class="card-header">
@@ -102,6 +103,7 @@
                 </form>
             </div>
         </div>
+        @endcan
     </div>
     <!-- end: grid -->
 </x-app-layout>
