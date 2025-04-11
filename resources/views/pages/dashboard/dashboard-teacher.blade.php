@@ -55,8 +55,13 @@
                                                 </span>
                                             </div>
                                         </td>
-                                        <td>{{\Carbon\Carbon::parse($cohort->start_date)->year}} - {{\Carbon\Carbon::parse($cohort->end_date)->year}}</td>
-                                        <td>{{$cohort->students}}</td>
+                                        <<td class="p-3 table-light">
+                                            <form method="POST" action="{{ route('skill.learnt', $skill->id) }}">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit"> <a class="btn-success btn-sm"> Créer </a> </button>
+                                            </form>
+                                        </td>
                                     </tr>
                                         @endif
                                     @endforeach
