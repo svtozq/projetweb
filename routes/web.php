@@ -36,6 +36,8 @@ Route::middleware('auth')->group(function () {
         Route::get('students', [StudentController::class, 'index'])->name('student.index');
         Route::post('student/create', [StudentController::class, 'create'])->name('student.create');
         Route::get('student/{student}/delete', [StudentController::class, 'delete'])->name('student.delete');
+        Route::get('student/{studentId}/edit', [StudentController::class, 'edit'])->name('student.edit');
+        Route::put('student/{studentId}/update', [StudentController::class, 'update'])->name('student.update');
 
         // Knowledge
         Route::get('knowledge', [KnowledgeController::class, 'index'])->name('knowledge.index');

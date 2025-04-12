@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Student;
-use Illuminate\Http\Request;
 use App\Models\UserSchool;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class StudentController extends Controller
@@ -18,7 +17,6 @@ class StudentController extends Controller
     }
 
     public function create(Request $request){
-
         $studentCreate = User::create([
             'last_name' => $request->last_name,
             'first_name' => $request->first_name,
@@ -36,14 +34,32 @@ class StudentController extends Controller
         return redirect()->back();
     }
 
+    public function edit($studentId)
+    {
+        $student = User::find($studentId);
+        return view('pages.students.student-', compact('student'));
+    }
+
+    public function update(Request $request, $studentId){
+        $student = User::find($studentId);
+
+        $student->update([
+            'last_name' => $request->last_name,
+            'first_name' => $request->first_name,
+            'birth_date'=> $request->birth_date,
+            'email'=> $request->email,
+        ]);
+        return redirect()->route('student.index');
+    }
+
     public function delete($student){
-        $deletestudent = User::find($student);
-        $deletestudent->delete();
+        $deletestudentU = User::find($student);
+        $deletestudentU->delete();
 
-        $studentUserSchool = $deletestudent->id;
+        $studentId = $deletestudentU->id;
 
-        $deletestudent1 = UserSchool::find($studentUserSchool);
-        $deletestudent1->delete();
+        $deletestudentUS = UserSchool::find($studentId);
+        $deletestudentUS->delete();
 
         return redirect()->back();
     }

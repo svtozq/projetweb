@@ -62,7 +62,7 @@
                                                     </a>
 
                                                     <a class="hover:text-primary cursor-pointer" href="#"
-                                                       data-modal-toggle="#student-modal">
+                                                       data-modal-toggle="#student-modal" data-id="{{$student->id}}">
                                                         <i class="ki-filled ki-cursor"></i>
                                                     </a>
                                                 </div>
