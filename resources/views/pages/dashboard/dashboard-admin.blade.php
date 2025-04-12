@@ -8,67 +8,30 @@
     </x-slot>
 
     <!-- begin: grid -->
+
     <div class="grid lg:grid-cols-3 gap-5 lg:gap-7.5 items-stretch">
         <div class="lg:col-span-2">
             <div class="grid">
                 <div class="card card-grid h-full min-w-full">
-                    <div class="card-header">
-                        <h3 class="card-title">
-                            <a href="{{route('cohort.index')}}" class="hover:text-primary">
-                            Promotions
-                            </a>
-                        </h3>
-                    </div>
-                    <div class="card-body flex flex-col gap-5">
-                        <p> {{$cohorts}} </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="lg:col-span-2">
-            <div class="grid">
-                <div class="card card-grid h-full min-w-full">
-                    <div class="card-header">
-                        <h3 class="card-title">
-                            <a href="{{route('teacher.index')}}" class="hover:text-primary">
-                            Enseignants
-                            </a>
-                        </h3>
-                    </div>
-                    <div class="card-body flex flex-col gap-5">
-                        <p> {{$teachers}} </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="lg:col-span-2">
-            <div class="grid">
-                <div class="card card-grid h-full min-w-full">
-                    <div class="card-header">
-                        <h3 class="card-title">
-                            <a href="{{route('student.index')}}" class="hover:text-primary">
-                            Étudiants
-                            </a>
-                        </h3>
-                    </div>
-                    <div class="card-body flex flex-col gap-5">
-                        <p> {{$students}} </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="lg:col-span-2">
-            <div class="grid">
-                <div class="card card-grid h-full min-w-full">
-                    <div class="card-header">
-                        <h3 class="card-title">
-                            <a href="{{route('group.index')}}" class="hover:text-primary">
-                            Groupes
-                            </a>
-                        </h3>
-                    </div>
-                    <div class="card-body flex flex-col gap-5">
-                        <p> {{$groups}} </p>
+                    <div class="d-flex justify-content-center table">
+                        <table class="table-bordered table-hover table-striped text-center align-middle" style="width: 100%;">
+                            <thead class="table-light" style="margin-top: 20px; margin-bottom: 20px;">
+                            <tr>
+                                <th class="p-3"> PROMOTIONS </th>
+                                <th class="p-3"> ENSEIGNANTS </th>
+                                <th class="p-3"> ÉLÈVES </th>
+                                <th class="p-3"> GROUPES </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                    <tr>
+                                        <td class="p-3 table-light">{{$cohorts}}</td>
+                                        <td class="p-3 table-light">{{$teachers}}</td>
+                                        <td class="p-3 table-light">{{$students}}</td>
+                                        <td class="p-3 table-light">{{$groups}}</td>
+                                    </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

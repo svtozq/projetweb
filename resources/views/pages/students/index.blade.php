@@ -47,14 +47,18 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($students as $student)
+                                    @if($studentsrole && $studentsrole->contains('user_id', $student->id))
+                                        <form method="POST">
+                                            @csrf
                                         <tr>
-                                            <td>Doe</td>
-                                            <td>John</td>
-                                            <td>12/02/2000</td>
+                                            <td>{{$student->last_name}}</td>
+                                            <td>{{$student->first_name}}</td>
+                                            <td>{{$student->birth_date}}</td>
                                             <td>
                                                 <div class="flex items-center justify-between">
-                                                    <a href="#">
-                                                        <i class="text-success ki-filled ki-shield-tick"></i>
+                                                    <a href="{{ route('student.delete', $student) }}">
+                                                        <button class="text-danger ki-filled ki-shield-cross"></button>
                                                     </a>
 
                                                     <a class="hover:text-primary cursor-pointer" href="#"
@@ -64,22 +68,25 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>Joe</td>
-                                            <td>Dohn</td>
-                                            <td>02/12/2000</td>
-                                            <td>
-                                                <div class="flex items-center justify-between">
-                                                    <a href="#">
-                                                        <i class="text-danger ki-filled ki-shield-cross"></i>
-                                                    </a>
-                                                    <a class="hover:text-primary cursor-pointer" href="#"
-                                                       data-modal-toggle="#student-modal">
-                                                        <i class="ki-filled ki-cursor"></i>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        </form>
+                                    @endif
+                                    @endforeach
+{{--                                        <tr>--}}
+{{--                                            <td>Joe</td>--}}
+{{--                                            <td>Dohn</td>--}}
+{{--                                            <td>02/12/2000</td>--}}
+{{--                                            <td>--}}
+{{--                                                <div class="flex items-center justify-between">--}}
+{{--                                                    <a href="#">--}}
+{{--                                                        <i class="text-danger ki-filled ki-shield-cross"></i>--}}
+{{--                                                    </a>--}}
+{{--                                                    <a class="hover:text-primary cursor-pointer" href="#"--}}
+{{--                                                       data-modal-toggle="#student-modal">--}}
+{{--                                                        <i class="ki-filled ki-cursor"></i>--}}
+{{--                                                    </a>--}}
+{{--                                                </div>--}}
+{{--                                            </td>--}}
+{{--                                        </tr>--}}
                                     </tbody>
                                 </table>
                             </div>
@@ -106,10 +113,22 @@
                         Ajouter un étudiant
                     </h3>
                 </div>
-                <div class="card-body flex flex-col gap-5">
-                    Formulaire à créer
-                    <!-- @todo A compléter -->
-                </div>
+                <form method="POST" action="{{ route('student.create') }}">
+                    @csrf
+                    <div class="card-body flex flex-col gap-5">
+                        <x-forms.input name="first_name" :label="__('Nom')" />
+
+                        <x-forms.input name="last_name" :label="__('Prénom')" />
+
+                        <x-forms.input type="date" name="birth_date" :label="__('Date de Naissance')" placeholder="" />
+
+                        <x-forms.input type="email" name="email" :label="__('Email')" placeholder="" />
+
+                        <x-forms.primary-button>
+                            {{ __('Ajouter') }}
+                        </x-forms.primary-button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
