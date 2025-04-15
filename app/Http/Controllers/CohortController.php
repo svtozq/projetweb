@@ -33,4 +33,24 @@ class CohortController extends Controller
         $myStudents = Student::query()->where('cohort_id', $cohorts->first->id)->get();
         return view('pages.cohorts.show',  compact('cohort', 'cohorts', 'students', 'myStudents'));
     }
+
+    public function create(Request $request){
+        $cohortCreate = Cohort::create([
+            'school_id' => 1,
+            'name' => $request->name,
+            'description' => $request->description,
+            'students'=> $request->students,
+            'start_date'=> $request->start_date,
+            'end_date'=> $request->end_date,
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function delete($cohortId){
+        $cohort = Cohort::find($cohortId);
+        $cohort->delete();
+
+        return redirect()->back();
+    }
 }

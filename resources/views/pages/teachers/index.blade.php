@@ -37,41 +37,40 @@
                                                 <span class="sort-icon"></span>
                                             </span>
                                         </th>
+                                        <th class="min-w-[135px]">
+                                            <span class="sort">
+                                                <span class="sort-label">Email</span>
+                                                <span class="sort-icon"></span>
+                                            </span>
+                                        </th>
                                         <th class="w-[70px]"></th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Doe</td>
-                                            <td>John</td>
-                                            <td>
-                                                <div class="flex items-center justify-between">
-                                                    <a href="#">
-                                                        <i class="text-success ki-filled ki-shield-tick"></i>
-                                                    </a>
+                                    @foreach($teachers as $teacher)
+                                        @if($teachersrole && $teachersrole->contains('user_id', $teacher->id))
+                                            <form method="POST">
+                                                @csrf
+                                                <tr>
+                                                    <td>{{$teacher->last_name}}</td>
+                                                    <td>{{$teacher->first_name}}</td>
+                                                    <td>{{$teacher->email}}</td>
+                                                    <td>
+                                                        <div class="flex items-center justify-between">
+                                                            <a href="{{ route('teacher.delete', $teacher) }}">
+                                                                <button class="text-danger ki-filled ki-shield-cross"></button>
+                                                            </a>
 
-                                                    <a class="hover:text-primary cursor-pointer" href="#"
-                                                       data-modal-toggle="#student-modal">
-                                                        <i class="ki-filled ki-cursor"></i>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Joe</td>
-                                            <td>Dohn</td>
-                                            <td>
-                                                <div class="flex items-center justify-between">
-                                                    <a href="#">
-                                                        <i class="text-danger ki-filled ki-shield-cross"></i>
-                                                    </a>
-                                                    <a class="hover:text-primary cursor-pointer" href="#"
-                                                       data-modal-toggle="#student-modal">
-                                                        <i class="ki-filled ki-cursor"></i>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                            <a class="hover:text-primary cursor-pointer" href="#"
+                                                               data-modal-toggle="#student-modal" data-id="{{$teacher->id}}">
+                                                                <i class="ki-filled ki-cursor"></i>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </form>
+                                        @endif
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -98,10 +97,21 @@
                         Ajouter un Enseignant
                     </h3>
                 </div>
-                <div class="card-body flex flex-col gap-5">
-                    Formulaire à créer
-                    <!-- @todo A compléter -->
-                </div>
+                <form method="POST" action="{{ route('teacher.create') }}">
+                    @csrf
+                    <div class="card-body flex flex-col gap-5">
+                        <x-forms.input name="last_name" :label="__('Nom')" />
+
+                        <x-forms.input name="first_name" :label="__('Prénom')" />
+
+
+                        <x-forms.input type="email" name="email" :label="__('Email')" placeholder="" />
+
+                        <x-forms.primary-button>
+                            {{ __('Ajouter') }}
+                        </x-forms.primary-button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

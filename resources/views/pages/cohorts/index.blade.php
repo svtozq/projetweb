@@ -39,9 +39,12 @@
                                                 <span class="sort-icon"></span>
                                             </span>
                                         </th>
+                                        <th class="min-w-[135px]">
+                                        </th>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($cohorts as $cohort)
                                         <tr>
                                         <td>
                                             <div class="flex flex-col gap-2">
@@ -56,7 +59,20 @@
                                         </td>
                                         <td>{{\Carbon\Carbon::parse($cohort->start_date)->year}} - {{\Carbon\Carbon::parse($cohort->end_date)->year}}</td>
                                         <td>{{$cohort->students}}</td>
+                                            <td>
+                                                <div class="flex items-center justify-between">
+                                                    <a href="{{ route('cohort.delete', $cohort) }}">
+                                                        <button class="text-danger ki-filled ki-shield-cross"></button>
+                                                    </a>
+
+                                                    <a class="hover:text-primary cursor-pointer" href="#"
+                                                       data-modal-toggle="#student-modal" data-id="{{$cohort->id}}">
+                                                        <i class="ki-filled ki-cursor"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
                                     </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -85,16 +101,17 @@
                     </h3>
                 </div>
                 <form method="POST" action="{{ route('cohort.create') }}">
+                    @csrf
                 <div class="card-body flex flex-col gap-5">
                     <x-forms.input name="name" :label="__('Nom')" />
 
                     <x-forms.input name="description" :label="__('Description')" />
 
-                    <x-forms.input type="date" name="year" :label="__('Début de l\'année')" placeholder="" />
-
-                    <x-forms.input type="date" name="year" :label="__('Fin de l\'année')" placeholder="" />
-
                     <x-forms.input type="number" min="1" max="100" name="students" :label="__('Etudiants')" placeholder="" />
+
+                    <x-forms.input type="date" name="start_date" :label="__('Début de l\'année')" placeholder="" />
+
+                    <x-forms.input type="date" name="end_date" :label="__('Fin de l\'année')" placeholder="" />
 
                     <x-forms.primary-button>
                         {{ __('Valider') }}

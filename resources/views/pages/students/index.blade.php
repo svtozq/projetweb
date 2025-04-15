@@ -116,9 +116,9 @@
                 <form method="POST" action="{{ route('student.create') }}">
                     @csrf
                     <div class="card-body flex flex-col gap-5">
-                        <x-forms.input name="first_name" :label="__('Nom')" />
+                        <x-forms.input name="last_name" :label="__('Nom')" />
 
-                        <x-forms.input name="last_name" :label="__('Prénom')" />
+                        <x-forms.input name="first_name" :label="__('Prénom')" />
 
                         <x-forms.input type="date" name="birth_date" :label="__('Date de Naissance')" placeholder="" />
 

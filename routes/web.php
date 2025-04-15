@@ -26,16 +26,19 @@ Route::middleware('auth')->group(function () {
 
         // Cohorts
         Route::get('/cohorts', [CohortController::class, 'index'])->name('cohort.index');
-        Route::get('/cohort/{cohort}', [CohortController::class, 'show'])->name('cohort.show');
         Route::post('/cohort/create', [CohortController::class, 'create'])->name('cohort.create');
+        Route::get('/cohort/{cohort}', [CohortController::class, 'show'])->name('cohort.show');
+        Route::get('/cohort/{cohort}/delete', [CohortController::class, 'delete'])->name('cohort.delete');
 
         // Teachers
         Route::get('/teachers', [TeacherController::class, 'index'])->name('teacher.index');
+        Route::post('/teacher/create', [StudentController::class, 'create'])->name('teacher.create');
+        Route::get('/teachers/{teacherId}/delete', [TeacherController::class, 'delete'])->name('teacher.delete');
 
         // Students
         Route::get('students', [StudentController::class, 'index'])->name('student.index');
         Route::post('student/create', [StudentController::class, 'create'])->name('student.create');
-        Route::get('student/{student}/delete', [StudentController::class, 'delete'])->name('student.delete');
+        Route::get('student/{studentId}/delete', [StudentController::class, 'delete'])->name('student.delete');
         Route::get('student/{studentId}/edit', [StudentController::class, 'edit'])->name('student.edit');
         Route::put('student/{studentId}/update', [StudentController::class, 'update'])->name('student.update');
 
