@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\PasswordMail;
 use App\Models\UserSchool;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class StudentController extends Controller
 {
@@ -25,19 +27,20 @@ class StudentController extends Controller
             'password'=> Hash::make('123456'),
         ]);
 
-        $studentCreate1 = UserSchool::create([
+        UserSchool::create([
             'user_id' => $studentCreate->id,
             'school_id' => 1,
             'role'=> 'student',
         ]);
 
-        return redirect()->back();
-    }
+        $toEmail = $request->email;
+        $messageEmail = "Votre Email : {$toEmail}";
 
-    public function edit($studentId)
-    {
-        $student = User::find($studentId);
-        return view('pages.students.student-', compact('student'));
+        $subject = 'Espace Coding Factory';
+
+        $response = Mail::to($toEmail)->send(new PasswordMail($messageEmail, $subject));
+
+        return redirect()->back();
     }
 
     public function update(Request $request, $studentId){
@@ -49,7 +52,7 @@ class StudentController extends Controller
             'birth_date'=> $request->birth_date,
             'email'=> $request->email,
         ]);
-        return redirect()->route('student.index');
+        return redirect()->route('pages.students.index');
     }
 
     public function delete($studentId){

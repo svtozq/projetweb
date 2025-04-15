@@ -7,9 +7,9 @@
         @method('PUT')
         @csrf
         <div class="card-body flex flex-col gap-5">
-            <x-forms.input name="last_name" :label="__('Prénom')" value="{{old('last_name', $student->last_name)}}" />
+            <x-forms.input name="last_name" :label="__('Nom')" value="{{old('last_name', $student->last_name)}}" />
 
-            <x-forms.input name="first_name" :label="__('Nom')" value="{{old('first_name', $student->first_name)}}" />
+            <x-forms.input name="first_name" :label="__('Prénom')" value="{{old('first_name', $student->first_name)}}" />
 
             <x-forms.input type="date" name="birth_date" :label="__('Date de Naissance')" value="{{old('birth_date', $student->birth_date)}}" />
 

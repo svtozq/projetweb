@@ -13,7 +13,7 @@
             <div class="grid">
                 <div class="card card-grid h-full min-w-full">
                     <div class="card-header">
-                        <h3 class="card-title">Mes promotions</h3>
+                        <h3 class="card-title">Liste des promotions</h3>
                     </div>
                     <div class="card-body">
                         <div data-datatable="true" data-datatable-page-size="5">
@@ -35,12 +35,11 @@
                                         </th>
                                         <th class="min-w-[135px]">
                                             <span class="sort">
-                                                <span class="sort-label">Etudiants</span>
+                                                <span class="sort-label">Étudiants</span>
                                                 <span class="sort-icon"></span>
                                             </span>
                                         </th>
-                                        <th class="min-w-[135px]">
-                                        </th>
+                                        <th class="w-[70px]"></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -97,7 +96,7 @@
             <div class="card h-full">
                 <div class="card-header">
                     <h3 class="card-title">
-                        Ajouter une promotion
+                        Ajouter une Promotion
                     </h3>
                 </div>
                 <form method="POST" action="{{ route('cohort.create') }}">
@@ -107,7 +106,7 @@
 
                     <x-forms.input name="description" :label="__('Description')" />
 
-                    <x-forms.input type="number" min="1" max="100" name="students" :label="__('Etudiants')" placeholder="" />
+                    <x-forms.input type="number" min="1" max="100" name="students" :label="__('Étudiants')" placeholder="" />
 
                     <x-forms.input type="date" name="start_date" :label="__('Début de l\'année')" placeholder="" />
 

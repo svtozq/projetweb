@@ -2,7 +2,7 @@
     <x-slot name="header">
         <h1 class="flex items-center gap-1 text-sm font-normal">
             <span class="text-gray-700">
-                {{ __('Etudiants') }}
+                {{ __('Étudiants') }}
             </span>
         </h1>
     </x-slot>
@@ -43,6 +43,12 @@
                                                 <span class="sort-icon"></span>
                                             </span>
                                         </th>
+                                        <th class="min-w-[135px]">
+                                            <span class="sort">
+                                                <span class="sort-label">Email</span>
+                                                <span class="sort-icon"></span>
+                                            </span>
+                                        </th>
                                         <th class="w-[70px]"></th>
                                     </tr>
                                     </thead>
@@ -55,6 +61,7 @@
                                             <td>{{$student->last_name}}</td>
                                             <td>{{$student->first_name}}</td>
                                             <td>{{$student->birth_date}}</td>
+                                            <td>{{$student->email}}</td>
                                             <td>
                                                 <div class="flex items-center justify-between">
                                                     <a href="{{ route('student.delete', $student) }}">
@@ -110,7 +117,7 @@
             <div class="card h-full">
                 <div class="card-header">
                     <h3 class="card-title">
-                        Ajouter un étudiant
+                        Ajouter un Étudiant
                     </h3>
                 </div>
                 <form method="POST" action="{{ route('student.create') }}">
@@ -127,6 +134,8 @@
                         <x-forms.primary-button>
                             {{ __('Ajouter') }}
                         </x-forms.primary-button>
+
+                        </a>
                     </div>
                 </form>
             </div>

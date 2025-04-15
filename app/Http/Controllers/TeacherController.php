@@ -24,7 +24,7 @@ class TeacherController extends Controller
             'password'=> Hash::make('123456'),
         ]);
 
-        $teacherCreate1 = UserSchool::create([
+        UserSchool::create([
             'user_id' => $teacherCreate->id,
             'school_id' => 1,
             'role'=> 'teacher',
@@ -33,13 +33,22 @@ class TeacherController extends Controller
         return redirect()->back();
     }
 
+    public function update(Request $request, $teacherId){
+        $teacher = User::find($teacherId);
+
+        $teacher->update([
+            'last_name' => $request->last_name,
+            'first_name' => $request->first_name,
+            'email'=> $request->email,
+        ]);
+        return redirect()->route('pages.teachers.index');
+    }
+
     public function delete($teacherId) {
         $deleteteacherU = User::find($teacherId);
         $deleteteacherU->delete();
 
-        $teacher = $deleteteacherU->id;
-
-        $deleteteacherUS = UserSchool::find($teacher);
+        $deleteteacherUS = UserSchool::find($teacherId);
         $deleteteacherUS->delete();
 
         return redirect()->back();
