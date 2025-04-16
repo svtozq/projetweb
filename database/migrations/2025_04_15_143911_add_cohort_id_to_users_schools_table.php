@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('teachers', function (Blueprint $table) {
-            $table->id();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->timestamps();
+        Schema::table('users_schools', function (Blueprint $table) {
+            $table->unsignedBigInteger('cohort_id')->nullable();
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('teachers');
+        Schema::table('users_schools', function (Blueprint $table) {
+            $table->dropColumn('cohort_id');
+        });
     }
 };

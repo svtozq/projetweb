@@ -8,29 +8,25 @@
     </x-slot>
 
     <!-- begin: grid -->
+
     <div class="grid lg:grid-cols-3 gap-5 lg:gap-7.5 items-stretch">
         <div class="lg:col-span-2">
             <div class="grid">
                 <div class="card card-grid h-full min-w-full">
-                    <div class="card-header">
-                        <h3 class="card-title">
-                            Block 1
-                        </h3>
+                    <div class="d-flex justify-content-center table">
+                        <table class="table-bordered table-hover table-striped text-center align-middle" style="width: 100%;">
+                            <thead class="table-light" style="margin-top: 20px; margin-bottom: 20px;">
+                            <tr>
+                                <th class="p-3"> MA PROMOTION </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="p-3 table-light"></td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="card-body flex flex-col gap-5">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="lg:col-span-1">
-            <div class="card card-grid h-full min-w-full">
-                <div class="card-header">
-                    <h3 class="card-title">
-                        Block 2
-                    </h3>
-                </div>
-                <div class="card-body flex flex-col gap-5">
                 </div>
             </div>
         </div>

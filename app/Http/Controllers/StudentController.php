@@ -35,10 +35,9 @@ class StudentController extends Controller
 
         $toEmail = $request->email;
         $messageEmail = "Votre Email : {$toEmail}";
-
         $subject = 'Espace Coding Factory';
 
-        $response = Mail::to($toEmail)->send(new PasswordMail($messageEmail, $subject));
+        Mail::to($toEmail)->send(new PasswordMail($messageEmail, $subject));
 
         return redirect()->back();
     }

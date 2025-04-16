@@ -6,4 +6,13 @@
             </span>
         </h1>
     </x-slot>
+
+    <div class="grid lg:grid-cols-3 gap-5 lg:gap-7.5 items-stretch">
+        <div class="lg:col-span-2">
+            <div class="grid">
+                <div class="card card-grid h-full min-w-full">
+                </div>
+            </div>
+        </div>
+    </div>
 </x-app-layout>

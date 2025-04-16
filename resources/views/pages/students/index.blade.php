@@ -134,8 +134,6 @@
                         <x-forms.primary-button>
                             {{ __('Ajouter') }}
                         </x-forms.primary-button>
-
-                        </a>
                     </div>
                 </form>
             </div>
