@@ -51,7 +51,7 @@ class StudentController extends Controller
             'birth_date'=> $request->birth_date,
             'email'=> $request->email,
         ]);
-        return redirect()->route('pages.students.index');
+        return redirect()->route('student.index');
     }
 
     public function delete($studentId){

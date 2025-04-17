@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UserSchool;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -30,7 +31,7 @@ class ProfileController extends Controller
         $request->validate([
             'email' => ['sometimes', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
             'current_password' => ['required_with:password', 'current_password'],
-            'password' => ['sometimes', 'string', 'min:6', 'confirmed'],
+            'password' => ['sometimes', 'string', 'min:8', 'confirmed'],
         ]);
 
         if ($request->filled('email')) {
@@ -41,14 +42,6 @@ class ProfileController extends Controller
             $user->password = Hash::make($request->password);
         }
 
-        if ($request->filled('last_name')) {
-            $user->last_name = $request->last_name;
-        }
-
-        if ($request->filled('first_name')) {
-            $user->first_name = $request->first_name;
-        }
-
         $user->fill($request->only(['email', 'password']));
         $user->save();
         return redirect()->back();
@@ -57,9 +50,10 @@ class ProfileController extends Controller
     /**
      * Delete the user's account.
      */
-    public function destroy(Request $request): RedirectResponse
+    public function delete(Request $request): RedirectResponse
     {
-        $request->validateWithBag('userDeletion', [
+        $request->validateWithBag('userDeletion',[
+            'delete' => ['required', 'accepted'],
             'password' => ['required', 'current_password'],
         ]);
 
@@ -68,6 +62,7 @@ class ProfileController extends Controller
         Auth::logout();
 
         $user->delete();
+        UserSchool::find($user->id)->delete();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();

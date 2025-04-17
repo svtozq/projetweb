@@ -19,7 +19,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile/{user}/update', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::delete('/profile/delete', [ProfileController::class, 'delete'])->name('profile.delete');
 
     Route::middleware('verified')->group(function () {
         // Dashboard
@@ -33,15 +33,17 @@ Route::middleware('auth')->group(function () {
 
         // Teachers
         Route::get('/teachers', [TeacherController::class, 'index'])->name('teacher.index');
-        Route::post('/teacher/create', [StudentController::class, 'create'])->name('teacher.create');
-        Route::get('/teachers/{teacherId}/delete', [TeacherController::class, 'delete'])->name('teacher.delete');
-        Route::put('/teachers/{teacherId}/update', [StudentController::class, 'update'])->name('teacher.update');
+        Route::post('/teacher/create', [TeacherController::class, 'create'])->name('teacher.create');
+        Route::put('/teacher/{teacherId}/update', [TeacherController::class, 'update'])->name('teacher.update');
+        Route::get('/teacher/{teacherId}/delete', [TeacherController::class, 'delete'])->name('teacher.delete');
+
 
         // Students
         Route::get('/students', [StudentController::class, 'index'])->name('student.index');
         Route::post('/student/create', [StudentController::class, 'create'])->name('student.create');
-        Route::get('/student/{studentId}/delete', [StudentController::class, 'delete'])->name('student.delete');
         Route::put('/student/{studentId}/update', [StudentController::class, 'update'])->name('student.update');
+        Route::get('/student/{studentId}/delete', [StudentController::class, 'delete'])->name('student.delete');
+
 
         // Knowledge
         Route::get('/knowledge', [KnowledgeController::class, 'index'])->name('knowledge.index');

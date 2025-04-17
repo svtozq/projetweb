@@ -78,22 +78,6 @@
                                         </form>
                                     @endif
                                     @endforeach
-{{--                                        <tr>--}}
-{{--                                            <td>Joe</td>--}}
-{{--                                            <td>Dohn</td>--}}
-{{--                                            <td>02/12/2000</td>--}}
-{{--                                            <td>--}}
-{{--                                                <div class="flex items-center justify-between">--}}
-{{--                                                    <a href="#">--}}
-{{--                                                        <i class="text-danger ki-filled ki-shield-cross"></i>--}}
-{{--                                                    </a>--}}
-{{--                                                    <a class="hover:text-primary cursor-pointer" href="#"--}}
-{{--                                                       data-modal-toggle="#student-modal">--}}
-{{--                                                        <i class="ki-filled ki-cursor"></i>--}}
-{{--                                                    </a>--}}
-{{--                                                </div>--}}
-{{--                                            </td>--}}
-{{--                                        </tr>--}}
                                     </tbody>
                                 </table>
                             </div>

@@ -10439,11 +10439,14 @@ process.umask = function() { return 0; };
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
-/* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
+/* harmony import */ var _custom_teacher_modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./custom/teacher-modal */ "./resources/js/custom/teacher-modal.js");
+/* harmony import */ var _custom_teacher_modal__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_custom_teacher_modal__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
 
 
-window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_1__["default"];
-alpinejs__WEBPACK_IMPORTED_MODULE_1__["default"].start();
+
+window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_2__["default"];
+alpinejs__WEBPACK_IMPORTED_MODULE_2__["default"].start();
 
 /***/ }),
 
@@ -10459,6 +10462,81 @@ __webpack_require__.r(__webpack_exports__);
 
 window.axios = axios__WEBPACK_IMPORTED_MODULE_0__["default"];
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+/***/ }),
+
+/***/ "./resources/js/custom/teacher-modal.js":
+/*!**********************************************!*\
+  !*** ./resources/js/custom/teacher-modal.js ***!
+  \**********************************************/
+/***/ (() => {
+
+$(document).ready(function () {
+  $('a[data-modal-toggle="#teacher-modal"]').click(function (e) {
+    e.preventDefault();
+    var teacherId = $(this).data('id');
+    var last_name = $(this).data('last_name');
+    var first_name = $(this).data('first_name');
+    var email = $(this).data('email');
+    console.log('Filling fields with:', {
+      last_name: last_name,
+      first_name: first_name,
+      email: email
+    });
+
+    // Set the form action URL with the teacher's ID
+    var formAction = "/teacher/".concat(teacherId, "/update");
+    $('#teacherUpdateForm').data('action', formAction);
+
+    // Populate the modal with the teacher's data
+    setTimeout(function () {
+      $('#last_name').val(last_name);
+      $('#first_name').val(first_name);
+      $('#email').val(email);
+    }, 100);
+
+    // Show the modal
+    $('#teacher-modal').css('display', 'flex');
+  });
+
+  // Close the modal when clicking outside of the modal content
+  $('#teacher-modal').click(function (e) {
+    if ($(e.target).is('#teacher-modal')) {
+      $('#teacher-modal').css('display', 'none');
+    }
+  });
+
+  // Handle the form submission (AJAX)
+  $('#teacherUpdateForm').on('submit', function (e) {
+    e.preventDefault();
+    var data = {
+      last_name: $('#last_name').val(),
+      first_name: $('#first_name').val(),
+      email: $('#email').val(),
+      _method: 'PUT',
+      // Laravel's way to simulate PUT requests in forms
+      _token: $('input[name="_token"]').val() // CSRF Token
+    };
+    $.ajax({
+      url: $(this).data('action'),
+      type: 'POST',
+      data: data,
+      success: function success(response) {
+        alert(response.success);
+        $('#teacher-modal').css('display', 'none'); // Hide the modal
+        location.reload(); // Reload the page to reflect the changes
+      },
+      error: function error(xhr) {
+        // If error, handle it
+        var errorMessage = 'An error occurred.';
+        if (xhr.responseJSON && xhr.responseJSON.error) {
+          errorMessage = xhr.responseJSON.error;
+        }
+        alert(errorMessage); // Show the error message
+      }
+    });
+  });
+});
 
 /***/ }),
 
@@ -10534,6 +10612,18 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 				}
 /******/ 			}
 /******/ 			return result;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
 /******/ 		};
 /******/ 	})();
 /******/ 	

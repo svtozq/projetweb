@@ -42,16 +42,16 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($cohorts as $cohort)
-                                        @if($cohort->teacher_id == Auth::id())
+                                    @foreach($cohort as $myCohort)
+                                        @if($myCohort->teacher_id == Auth::id())
                                     <tr>
                                         <td>
                                             <div class="flex flex-col gap-2">
                                                 <a class="leading-none font-medium text-sm text-gray-900">
-                                                    {{$cohort->name}}
+                                                    {{$myCohort->name}}
                                                 </a>
                                                 <span class="text-2sm text-gray-700 font-normal leading-3">
-                                                    {{$cohort->description}}
+                                                    {{$myCohort->description}}
                                                 </span>
                                             </div>
                                         </td>

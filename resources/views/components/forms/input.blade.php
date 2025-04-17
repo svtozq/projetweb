@@ -6,24 +6,25 @@
     'value'         => '',
     'resetLink'     => false,
     'disabled'      => false,
-    'messages'      => false
+    'messages'      => false,
+    'id'            => null
 ])
 
 <div {{ $attributes->merge(['class' => 'flex flex-col gap-1']) }}>
     @if($type == 'password')
         @if($label)
-        <div class="flex items-center justify-between gap-1">
-            <label class="form-label font-normal text-gray-900">{{ $label }}</label>
-            @if (Route::has('password.request') && $resetLink)
-                <a class="text-2sm link shrink-0" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password ?') }}
-                </a>
-            @endif
-        </div>
+            <div class="flex items-center justify-between gap-1">
+                <label class="form-label font-normal text-gray-900">{{ $label }}</label>
+                @if (Route::has('password.request') && $resetLink)
+                    <a class="text-2sm link shrink-0" href="{{ route('password.request') }}">
+                        {{ __('Forgot your password ?') }}
+                    </a>
+                @endif
+            </div>
         @endif
         <div class="input" data-toggle-password="true">
             <input name="{{ $name }}" {{ $disabled ? 'disabled' : '' }} placeholder="{{ $placeholder }}"
-                   type="password" value="{{ $value }}"/>
+                   type="password" value="{{ $value }}" id="{{ $id ?? $name }}"/>
             <button class="btn btn-icon" data-toggle-password-trigger="true" type="button">
                 <i class="ki-filled ki-eye text-gray-500 toggle-password-active:hidden"></i>
                 <i class="ki-filled ki-eye-slash text-gray-500 hidden toggle-password-active:block"></i>
@@ -31,14 +32,18 @@
         </div>
     @else
         @if($label)
-            <label class="form-label font-normal text-gray-900">{{ $label }}</label>
+            <label class="form-label font-normal text-gray-900" for="{{ $id ?? $name }}">{{ $label }}</label>
         @endif
-        <input class="input" {{ $disabled ? 'disabled' : '' }} name="{{ $name }}"
-               placeholder="{{ $placeholder }}" type="{{ $type }}" value="{{ $value }}"/>
+        <input class="input"
+               id="{{ $id ?? $name }}"
+               name="{{ $name }}"
+               placeholder="{{ $placeholder }}"
+               type="{{ $type }}"
+               value="{{ $value }}"
+            {{ $disabled ? 'disabled' : '' }}/>
     @endif
 
     @if($messages)
         <x-forms.input-error :messages="$messages" class="mt-1" />
     @endif
 </div>
-

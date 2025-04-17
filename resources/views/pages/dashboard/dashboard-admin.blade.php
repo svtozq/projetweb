@@ -17,10 +17,10 @@
                         <table class="table-bordered table-hover table-striped text-center align-middle" style="width: 100%;">
                             <thead class="table-light" style="margin-top: 20px; margin-bottom: 20px;">
                             <tr>
-                                <th class="p-3"> PROMOTIONS </th>
-                                <th class="p-3"> ENSEIGNANTS </th>
-                                <th class="p-3"> ÉLÈVES </th>
-                                <th class="p-3"> GROUPES </th>
+                                <th class="p-3"> <a href=" {{ route('cohort.index') }} " class="hover:text-primary"> PROMOTIONS </a> </th>
+                                <th class="p-3"> <a href=" {{ route('teacher.index') }} " class="hover:text-primary"> ENSEIGNANTS </a> </th>
+                                <th class="p-3"> <a href=" {{ route('student.index') }} " class="hover:text-primary"> ÉLÈVES </a> </th>
+                                <th class="p-3"> <a href=" {{ route('group.index') }} " class="hover:text-primary"> GROUPES </a> </th>
                             </tr>
                             </thead>
                             <tbody>

@@ -36,12 +36,23 @@ class TeacherController extends Controller
     public function update(Request $request, $teacherId){
         $teacher = User::find($teacherId);
 
-        $teacher->update([
-            'last_name' => $request->last_name,
-            'first_name' => $request->first_name,
-            'email'=> $request->email,
+        if (!$teacher) {
+            return response()->json(['error' => 'Teacher not found'], 404);
+        }
+
+        $request->validate([
+            'last_name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $teacherId,
         ]);
-        return redirect()->route('pages.teachers.index');
+
+        $teacher->update([
+            'last_name' => $request->input('last_name'),
+            'first_name' => $request->input('first_name'),
+            'email'=> $request->input('email'),
+        ]);
+
+        return redirect()->route('teacher.index');
     }
 
     public function delete($teacherId) {

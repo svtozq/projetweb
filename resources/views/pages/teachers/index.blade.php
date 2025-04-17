@@ -50,6 +50,7 @@
                                     @foreach($teachers as $teacher)
                                         @if($teachersrole && $teachersrole->contains('user_id', $teacher->id))
                                             <form method="POST">
+                                                @method('PUT')
                                                 @csrf
                                                 <tr>
                                                     <td>{{$teacher->last_name}}</td>
@@ -62,13 +63,16 @@
                                                             </a>
 
                                                             <a class="hover:text-primary cursor-pointer" href="#"
-                                                               data-modal-toggle="#student-modal" data-id="{{$teacher->id}}">
+                                                               data-modal-toggle="#teacher-modal"
+                                                               data-id="{{$teacher->id}}"
+                                                               data-last_name="{{$teacher->last_name}}"
+                                                               data-first_name="{{$teacher->first_name}}"
+                                                               data-email="{{$teacher->email}}">
                                                                 <i class="ki-filled ki-cursor"></i>
                                                             </a>
                                                         </div>
                                                     </td>
                                                 </tr>
-                                            </form>
                                         @endif
                                     @endforeach
                                     </tbody>
