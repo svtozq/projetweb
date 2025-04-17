@@ -21,9 +21,11 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td class="p-3 table-light"></td>
-                            </tr>
+                            @foreach($userCohorts as $cohort)
+                                <tr>
+                                    <td class="p-3 table-light"> {{ $cohort->description }} , {{ $cohort->name }} , {{\Carbon\Carbon::parse($cohort->start_date)->year}} - {{\Carbon\Carbon::parse($cohort->end_date)->year}}</td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>

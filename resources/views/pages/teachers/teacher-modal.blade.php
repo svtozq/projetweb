@@ -15,6 +15,19 @@
 
             <x-forms.input id="first_name" name="first_name" :label="__('Prénom')"/>
 
+            <div>
+                <label for="cohort_id" class="form-label"> Promotions </label>
+                <select name="cohort_id" id="cohort_id"
+                        class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary text-sm shadow-sm">
+                    <option value="">{{ __('Lier à une promotion') }}</option>
+                    @foreach($cohorts as $cohort)
+                        <option value="{{ $cohort->id }}">
+                            {{ $cohort->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
             <x-forms.primary-button type="submit" id="submitTeacherForm">
                 {{ __('Modifier') }}
             </x-forms.primary-button>

@@ -28,8 +28,10 @@ Route::middleware('auth')->group(function () {
         // Cohorts
         Route::get('/cohorts', [CohortController::class, 'index'])->name('cohort.index');
         Route::post('/cohort/create', [CohortController::class, 'create'])->name('cohort.create');
-        Route::get('/cohort/{cohort}', [CohortController::class, 'show'])->name('cohort.show');
-        Route::get('/cohort/{cohort}/delete', [CohortController::class, 'delete'])->name('cohort.delete');
+        Route::get('/cohort/{cohortId}', [CohortController::class, 'show'])->name('cohort.show');
+        Route::post('/cohort/{cohortId}/add/student', [CohortController::class, 'addStudent'])->name('cohort.add.student');
+        Route::delete('/cohort/{cohortId}/delete/{studentId}', [CohortController::class, 'deleteStudent'])->name('cohort.delete.student');
+        Route::get('/cohort/{cohortId}/delete', [CohortController::class, 'delete'])->name('cohort.delete');
 
         // Teachers
         Route::get('/teachers', [TeacherController::class, 'index'])->name('teacher.index');

@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Cohort;
+use App\Models\CohortsSchools;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -21,5 +24,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Schema::defaultStringLength(191);
+
+        View::share('cohorts', Cohort::all());
+        View::share('cohortsSchools', CohortsSchools::all());
     }
 }

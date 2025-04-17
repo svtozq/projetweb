@@ -25,6 +25,14 @@ class CohortPolicy
     }
 
     /**
+     * Determine whether the user can view the model.
+     */
+    public function viewTeacher(User $user): bool
+    {
+        return $user->school()->pivot->role == 'teacher';
+    }
+
+    /**
      * Determine whether the user can create models.
      */
     public function create(User $user): bool

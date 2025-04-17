@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cohort;
+use App\Models\CohortsSchools;
 use App\Models\User;
 use App\Models\UserSchool;
 use Illuminate\Http\Request;
@@ -12,8 +14,9 @@ class TeacherController extends Controller
     public function index()
     {
         $teachers = User::all();
+        $cohorts = Cohort::all();
         $teachersrole = UserSchool::where('role', 'teacher')->get();
-        return view('pages.teachers.index', compact('teachers', 'teachersrole'));
+        return view('pages.teachers.index', compact('teachers', 'teachersrole', 'cohorts'));
     }
 
     public function create(Request $request){
@@ -39,6 +42,7 @@ class TeacherController extends Controller
             'email' => 'required|email|unique:users,email,' . $request->current_email . ',email',
             'last_name' => 'required|string|max:255',
             'first_name' => 'required|string|max:255',
+            'cohort_id' => 'nullable|exists:cohorts,id',
         ]);
 
         $teacher = User::where('email', $validated['current_email'])->first();
@@ -48,6 +52,13 @@ class TeacherController extends Controller
             'first_name' => $validated['first_name'],
             'email'=> $validated['email'],
         ]);
+
+        if ($request->filled('cohort_id')) {
+            CohortsSchools::create([
+                'cohort_id' => $validated['cohort_id'],
+                'user_id' => $teacher->id,
+            ]);
+        }
 
         return redirect()->route('teacher.index');
     }

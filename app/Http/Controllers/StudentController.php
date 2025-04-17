@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Mail\PasswordMail;
 use App\Models\UserSchool;
 use App\Models\User;
+use App\Models\Cohort;
+use App\Models\CohortsSchools;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -14,8 +16,9 @@ class StudentController extends Controller
     public function index()
     {
         $students = User::all();
+        $cohorts = Cohort::all();
         $studentsrole = UserSchool::where('role', 'student')->get();
-        return view('pages.students.index', compact('students', 'studentsrole'));
+        return view('pages.students.index', compact('students', 'studentsrole', 'cohorts'));
     }
 
     public function create(Request $request){
@@ -48,6 +51,7 @@ class StudentController extends Controller
             'email' => 'required|email|unique:users,email,' . $request->current_email . ',email',
             'last_name' => 'required|string|max:255',
             'first_name' => 'required|string|max:255',
+            'cohort_id' => 'nullable|exists:cohorts,id',
         ]);
 
         $student = User::where('email', $validated['current_email'])->first();
@@ -60,6 +64,13 @@ class StudentController extends Controller
 
         if ($request->filled('birth_date')) {
             $student->birth_date = $request->birth_date;
+        }
+
+        if ($request->filled('cohort_id')) {
+            CohortsSchools::create([
+                'cohort_id' => $validated['cohort_id'],
+                'user_id' => $student->id,
+            ]);
         }
 
         return redirect()->route('student.index');

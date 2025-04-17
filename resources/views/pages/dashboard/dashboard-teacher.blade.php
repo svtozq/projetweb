@@ -20,9 +20,9 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($cohort as $c)
+                            @foreach($userCohorts as $cohort)
                             <tr>
-                                <td class="p-3 table-light"> {{ $c->description }} , {{ $c->name }} , {{\Carbon\Carbon::parse($c->start_date)->year}} - {{\Carbon\Carbon::parse($c->end_date)->year}}</td>
+                                <td class="p-3 table-light"> {{ $cohort->description }} , {{ $cohort->name }} , {{\Carbon\Carbon::parse($cohort->start_date)->year}} - {{\Carbon\Carbon::parse($cohort->end_date)->year}}</td>
                             </tr>
                             @endforeach
                             </tbody>
