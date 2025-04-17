@@ -35,7 +35,8 @@
                         </span>
                     </a>
                 </div>
-                @can('viewAny', \App\Models\Cohort::class)
+
+                @can('view', \App\Models\Cohort::class)
                 <div class="menu-item" data-menu-item-toggle="accordion" data-menu-item-trigger="click">
                     <div class="menu-link gap-2.5 py-2 px-2.5 rounded-md border border-transparent">
                         <span class="menu-icon items-start text-gray-600 text-lg menu-item-here:text-gray-800 menu-item-show:text-gray-800 menu-link-hover:text-gray-800 dark:menu-item-here:text-gray-900 dark:menu-item-show:text-gray-900 dark:menu-link-hover:text-gray-900">
@@ -78,7 +79,8 @@
                         <!-- FIN -->
                    </div>
                 </div>
-
+                @endcan
+                @can('viewAny', \App\Models\Cohort::class)
                 <div class="menu-item">
                     <a class="menu-link gap-2.5 py-2 px-2.5 rounded-md border border-transparent menu-item-active:border-gray-200 menu-item-active:bg-light menu-link-hover:bg-light menu-link-hover:border-gray-200"
                        href="{{ route('student.index') }}">

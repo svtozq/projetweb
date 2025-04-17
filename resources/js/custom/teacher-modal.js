@@ -54,7 +54,6 @@ $(document).ready(function () {
             success: function (response) {
                 alert(response.success);
                 $('#teacher-modal').css('display', 'none');  // Hide the modal
-                location.reload();  // Reload the page to reflect the changes
             },
             error: function (xhr) {
                 // If error, handle it

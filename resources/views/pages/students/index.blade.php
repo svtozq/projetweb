@@ -55,8 +55,6 @@
                                     <tbody>
                                     @foreach($students as $student)
                                     @if($studentsrole && $studentsrole->contains('user_id', $student->id))
-                                        <form method="POST">
-                                            @csrf
                                         <tr>
                                             <td>{{$student->last_name}}</td>
                                             <td>{{$student->first_name}}</td>
@@ -69,13 +67,12 @@
                                                     </a>
 
                                                     <a class="hover:text-primary cursor-pointer" href="#"
-                                                       data-modal-toggle="#student-modal" data-id="{{$student->id}}">
+                                                       data-modal-toggle="#student-modal">
                                                         <i class="ki-filled ki-cursor"></i>
                                                     </a>
                                                 </div>
                                             </td>
                                         </tr>
-                                        </form>
                                     @endif
                                     @endforeach
                                     </tbody>

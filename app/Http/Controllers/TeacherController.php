@@ -33,23 +33,20 @@ class TeacherController extends Controller
         return redirect()->back();
     }
 
-    public function update(Request $request, $teacherId){
-        $teacher = User::find($teacherId);
-
-        if (!$teacher) {
-            return response()->json(['error' => 'Teacher not found'], 404);
-        }
-
-        $request->validate([
+    public function update(Request $request) {
+        $validated = $request->validate([
+            'current_email' => 'required|email|exists:users,email',
+            'email' => 'required|email|unique:users,email,' . $request->current_email . ',email',
             'last_name' => 'required|string|max:255',
             'first_name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $teacherId,
         ]);
 
+        $teacher = User::where('email', $validated['current_email'])->first();
+
         $teacher->update([
-            'last_name' => $request->input('last_name'),
-            'first_name' => $request->input('first_name'),
-            'email'=> $request->input('email'),
+            'last_name' => $validated['last_name'],
+            'first_name' => $validated['first_name'],
+            'email'=> $validated['email'],
         ]);
 
         return redirect()->route('teacher.index');

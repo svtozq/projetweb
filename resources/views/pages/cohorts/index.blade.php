@@ -43,6 +43,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+
                                     @foreach($cohorts as $cohort)
                                         <tr>
                                         <td>
@@ -72,6 +73,8 @@
                                             </td>
                                     </tr>
                                     @endforeach
+
+
                                     </tbody>
                                 </table>
                             </div>

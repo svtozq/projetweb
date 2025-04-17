@@ -63,11 +63,7 @@
                                                             </a>
 
                                                             <a class="hover:text-primary cursor-pointer" href="#"
-                                                               data-modal-toggle="#teacher-modal"
-                                                               data-id="{{$teacher->id}}"
-                                                               data-last_name="{{$teacher->last_name}}"
-                                                               data-first_name="{{$teacher->first_name}}"
-                                                               data-email="{{$teacher->email}}">
+                                                               data-modal-toggle="#teacher-modal">
                                                                 <i class="ki-filled ki-cursor"></i>
                                                             </a>
                                                         </div>
@@ -107,7 +103,6 @@
                         <x-forms.input name="last_name" :label="__('Nom')" />
 
                         <x-forms.input name="first_name" :label="__('Prénom')" />
-
 
                         <x-forms.input type="email" name="email" :label="__('Email')" placeholder="" />
 

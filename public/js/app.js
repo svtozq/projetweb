@@ -10478,61 +10478,44 @@ $(document).ready(function () {
     var last_name = $(this).data('last_name');
     var first_name = $(this).data('first_name');
     var email = $(this).data('email');
-    console.log('Filling fields with:', {
-      last_name: last_name,
-      first_name: first_name,
-      email: email
-    });
+    $('#teacherUpdateForm').attr('action', "/teacher/".concat(teacherId, "/update"));
+    $('#last_name').val(last_name);
+    $('#first_name').val(first_name);
+    $('#email').val(email);
+    $('#current_email').val(email); // if you use current_email for update
 
-    // Set the form action URL with the teacher's ID
-    var formAction = "/teacher/".concat(teacherId, "/update");
-    $('#teacherUpdateForm').data('action', formAction);
-
-    // Populate the modal with the teacher's data
-    setTimeout(function () {
-      $('#last_name').val(last_name);
-      $('#first_name').val(first_name);
-      $('#email').val(email);
-    }, 100);
-
-    // Show the modal
     $('#teacher-modal').css('display', 'flex');
   });
-
-  // Close the modal when clicking outside of the modal content
   $('#teacher-modal').click(function (e) {
     if ($(e.target).is('#teacher-modal')) {
       $('#teacher-modal').css('display', 'none');
     }
   });
-
-  // Handle the form submission (AJAX)
   $('#teacherUpdateForm').on('submit', function (e) {
     e.preventDefault();
     var data = {
       last_name: $('#last_name').val(),
       first_name: $('#first_name').val(),
       email: $('#email').val(),
+      current_email: $('#current_email').val(),
+      // important!
       _method: 'PUT',
-      // Laravel's way to simulate PUT requests in forms
-      _token: $('input[name="_token"]').val() // CSRF Token
+      _token: $('input[name="_token"]').val()
     };
     $.ajax({
-      url: $(this).data('action'),
+      url: $(this).attr('action'),
       type: 'POST',
       data: data,
       success: function success(response) {
-        alert(response.success);
-        $('#teacher-modal').css('display', 'none'); // Hide the modal
-        location.reload(); // Reload the page to reflect the changes
+        alert(response.success || 'Updated successfully');
+        $('#teacher-modal').css('display', 'none');
       },
       error: function error(xhr) {
-        // If error, handle it
         var errorMessage = 'An error occurred.';
-        if (xhr.responseJSON && xhr.responseJSON.error) {
-          errorMessage = xhr.responseJSON.error;
+        if (xhr.responseJSON && xhr.responseJSON.message) {
+          errorMessage = xhr.responseJSON.message;
         }
-        alert(errorMessage); // Show the error message
+        alert(errorMessage);
       }
     });
   });

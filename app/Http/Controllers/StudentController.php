@@ -42,15 +42,26 @@ class StudentController extends Controller
         return redirect()->back();
     }
 
-    public function update(Request $request, $studentId){
-        $student = User::find($studentId);
+    public function update(Request $request){
+        $validated = $request->validate([
+            'current_email' => 'required|email|exists:users,email',
+            'email' => 'required|email|unique:users,email,' . $request->current_email . ',email',
+            'last_name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+        ]);
+
+        $student = User::where('email', $validated['current_email'])->first();
 
         $student->update([
-            'last_name' => $request->last_name,
-            'first_name' => $request->first_name,
-            'birth_date'=> $request->birth_date,
-            'email'=> $request->email,
+            'email'=> $validated['email'],
+            'last_name' => $validated['last_name'],
+            'first_name' => $validated['first_name'],
         ]);
+
+        if ($request->filled('birth_date')) {
+            $student->birth_date = $request->birth_date;
+        }
+
         return redirect()->route('student.index');
     }
 
