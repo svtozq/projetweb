@@ -39,13 +39,11 @@ Route::middleware('auth')->group(function () {
         Route::put('/teacher/update', [TeacherController::class, 'update'])->name('teacher.update');
         Route::get('/teacher/{teacherId}/delete', [TeacherController::class, 'delete'])->name('teacher.delete');
 
-
         // Students
         Route::get('/students', [StudentController::class, 'index'])->name('student.index');
         Route::post('/student/create', [StudentController::class, 'create'])->name('student.create');
         Route::put('/student/update', [StudentController::class, 'update'])->name('student.update');
         Route::get('/student/{studentId}/delete', [StudentController::class, 'delete'])->name('student.delete');
-
 
         // Knowledge
         Route::get('/knowledge', [KnowledgeController::class, 'index'])->name('knowledge.index');

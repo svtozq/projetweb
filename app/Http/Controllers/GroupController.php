@@ -9,11 +9,6 @@ use Illuminate\Http\Request;
 
 class GroupController extends Controller
 {
-    /**
-     * Display the page
-     *
-     * @return Factory|View|Application|object
-     */
     public function index() {
         return view('pages.groups.index');
     }

@@ -17,18 +17,18 @@
 
             <x-forms.input type="date" name="birth_date" :label="__('Date de Naissance')"/>
 
-            <div>
-                <label for="cohort_id" class="form-label"> Promotions </label>
-                <select name="cohort_id" id="cohort_id"
-                        class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary text-sm shadow-sm">
-                    <option value="">{{ __('Lier à une promotion') }}</option>
-                    @foreach($cohorts as $cohort)
-                        <option value="{{ $cohort->id }}">
-                            {{ $cohort->name }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
+{{--            <div>--}}
+{{--                <label for="cohort_id" class="form-label"> Promotions </label>--}}
+{{--                <select name="cohort_id" id="cohort_id"--}}
+{{--                        class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary text-sm shadow-sm">--}}
+{{--                    <option value="">{{ __('Lier à une promotion') }}</option>--}}
+{{--                    @foreach($cohorts as $cohort)--}}
+{{--                        <option value="{{ $cohort->id }}">--}}
+{{--                            {{ $cohort->name }}--}}
+{{--                        </option>--}}
+{{--                    @endforeach--}}
+{{--                </select>--}}
+{{--            </div>--}}
 
             <x-forms.primary-button>
                 {{ __('Modifier') }}

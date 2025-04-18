@@ -12,11 +12,6 @@ use Illuminate\Http\Request;
 
 class RetroController extends Controller
 {
-    /**
-     * Display the page
-     *
-     * @return Factory|View|Application|object
-     */
     public function index() {
         return view('pages.retros.index',);
     }

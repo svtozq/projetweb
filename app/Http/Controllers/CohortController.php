@@ -13,54 +13,51 @@ use Illuminate\Http\Request;
 
 class CohortController extends Controller
 {
-    /**
-     * Display all available cohorts
-     * @return Factory|View|Application|object
-     */
     public function index() {
+        // Get the logged-in user
         $user = auth()->user();
 
+        // Get cohorts of the logged-in user
         $userCohortsId = CohortsSchools::where('user_id', $user->id)->pluck('cohort_id');
         $userCohorts = Cohort::whereIn('id', $userCohortsId)->get();
 
+        // Get all cohorts and Cohorts users
         $cohorts = Cohort::all();
         $cohortsSchools = CohortsSchools::all();
         return view('pages.cohorts.index',  compact('cohorts',  'cohortsSchools',  'userCohorts'));
     }
 
-
-    /**
-     * Display a specific cohort
-     * @param Cohort $cohortId
-     * @return Application|Factory|object|View
-     */
     public function show(Cohort $cohortId) {
+        // Get students information
         $students = UserSchool::where('role', 'student')->pluck('id');
-
         $allStudents = User::whereIn('id', $students)->get();
 
+        // Get usersId associated to this cohort
         $cohortUsersId = CohortsSchools::where('cohort_id', $cohortId->id)->pluck('user_id');
 
+        // Get usersId associated to this cohort who are students
         $studentsId = UserSchool::whereIn('user_id', $cohortUsersId)
             ->where('role', 'student')
             ->pluck('user_id');
 
+        // Get students associated to this cohort
         $cohortStudents = User::whereIn('id', $studentsId)->get();
 
         return view('pages.cohorts.show',  compact('cohortId', 'cohortStudents', 'allStudents'));
     }
 
     public function addStudent(Request $request, $cohortId) {
-        $user_id = $request->input('user_id');
+        // Get studentId
+        $student_id = $request->input('student_id');
 
-        $exists = CohortsSchools::where('cohort_id', $cohortId)
-            ->where('user_id', $user_id)
-            ->exists();
+        // Verify if student already has an associated cohort
+        $exists = CohortsSchools::where('user_id', $student_id)->exists();
 
+        // If not create in DB a row for the student associated w this cohort
         if (!$exists) {
             CohortsSchools::create([
                 'cohort_id' => $cohortId,
-                'user_id' => $user_id,
+                'user_id' => $student_id,
             ]);
         }
 
@@ -68,14 +65,15 @@ class CohortController extends Controller
     }
 
     public function deleteStudent($cohortId, $studentId) {
-        $cohortStudent = CohortsSchools::where('cohort_id', $cohortId)
-                                        ->where('user_id', $studentId);
+        // Delete row for the student associated w this cohort
+        $cohortStudent = CohortsSchools::where('cohort_id', $cohortId)->where('user_id', $studentId);
         $cohortStudent->delete();
 
         return redirect()->back();
     }
 
-    public function create(Request $request){
+    public function create(Request $request) {
+        // Create a cohort w the sent requests
         Cohort::create([
             'school_id' => 1,
             'name' => $request->name,
@@ -88,7 +86,12 @@ class CohortController extends Controller
         return redirect()->back();
     }
 
-    public function delete($cohortId){
+    public function delete($cohortId) {
+        // Delete rows for students & teachers associated w this cohort
+        $cohortUsers = CohortsSchools::where('cohort_id', $cohortId);
+        $cohortUsers->delete();
+
+        // Delete this cohort
         $cohort = Cohort::find($cohortId);
         $cohort->delete();
 

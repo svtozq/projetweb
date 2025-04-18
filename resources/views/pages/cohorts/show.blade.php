@@ -53,9 +53,9 @@
                                                     <form method="POST" action="{{ route('cohort.delete.student', ['cohortId' => $cohortId, 'studentId' => $students->id]) }}">
                                                         @csrf
                                                         @method('DELETE')
-                                                    <button type="submit">
-                                                    <i class="ki-filled ki-trash"></i>
-                                                    </button>
+                                                        <button type="submit">
+                                                        <i class="ki-filled ki-trash"></i>
+                                                        </button>
                                                     </form>
                                                 </td>
                                                 @endcan
@@ -91,8 +91,8 @@
                         <form method="POST" action="{{ route('cohort.add.student', $cohortId) }}">
                             @csrf
                             <div class="card-body flex flex-col gap-5">
-                                <label for="user_id" class="form-label">Étudiant</label>
-                                <select id="user_id" name="user_id" class="form-select border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary text-sm shadow-sm">
+                                <label for="student_id" class="form-label">Étudiant</label>
+                                <select id="student_id" name="student_id" class="form-select border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary text-sm shadow-sm">
                                     <option value="" disabled selected>{{ __('Sélectionner un étudiant') }}</option> <!-- Default empty option -->
                                     @foreach($allStudents as $student)
                                         <option value="{{ $student->id }}">
