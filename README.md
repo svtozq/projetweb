@@ -98,3 +98,23 @@ npm run dev
 - 🧠 Génération automatique de QCM par langage sélectionné
 - ✅ Système de Kanban pour les rétrospectives
 - 📈 Statistiques d’usage et suivi pédagogique
+
+
+
+
+## ----------------
+
+## 📚 Backlog 1 :
+
+- ### STORY 1 : Terminé
+- ### STORY 2 : Terminé
+- ### STORY 3 : Terminé ( sauf requête AJAX )
+- ### STORY 4 : Terminé ( sauf requête AJAX & modification formulaire )
+- ### STORY 5 : Terminé ( sauf requête AJAX )
+- ### STORY 6 : Terminé ( sauf modification photo de profil )
+
+## ❗ Difficultés rencontrés :
+
+- ### Modal form 
+- ### Requête Ajax
+
